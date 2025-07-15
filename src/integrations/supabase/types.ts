@@ -718,6 +718,43 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
+      find_matching_loads: {
+        Args: {
+          trucker_vector: string
+          similarity_threshold?: number
+          trucker_broker_id?: string
+        }
+        Returns: {
+          id: string
+          title: string
+          description: string
+          pickup_city: string
+          pickup_state: string
+          delivery_city: string
+          delivery_state: string
+          truck_type: Database["public"]["Enums"]["truck_type"]
+          rate: number
+          distance_miles: number
+          similarity: number
+        }[]
+      }
+      find_matching_truckers: {
+        Args: {
+          load_vector: string
+          similarity_threshold?: number
+          load_broker_id?: string
+        }
+        Returns: {
+          id: string
+          company_name: string
+          truck_type: Database["public"]["Enums"]["truck_type"]
+          home_base_city: string
+          home_base_state: string
+          rate_per_mile_min: number
+          average_rating: number
+          similarity: number
+        }[]
+      }
       halfvec_avg: {
         Args: { "": number[] }
         Returns: unknown
