@@ -1,1 +1,19 @@
 project_id = "snledfnqtxrmdtazuxkv"
+
+[functions.invite-handler]
+verify_jwt = false
+
+[functions.vector-matching] 
+verify_jwt = false
+
+[functions.contract-signer]
+verify_jwt = false
+
+[functions.create-stripe-account]
+verify_jwt = true
+
+[functions.create-payment-intent]
+verify_jwt = true
+
+[functions.stripe-webhooks]
+verify_jwt = false
