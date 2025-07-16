@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AppLayout } from "@/components/layout/AppLayout";
+import RateScalpFeed from "@/components/freight/RateScalpFeed";
 import { 
   TrendingUp, 
   Package, 
@@ -246,6 +247,9 @@ export default function TruckerDashboard() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Rate Futures Feed */}
+        <RateScalpFeed />
 
         {/* Recent Bookings */}
         <Card className="industrial-shadow">

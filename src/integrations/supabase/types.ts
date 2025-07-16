@@ -476,6 +476,54 @@ export type Database = {
           },
         ]
       }
+      precommitments: {
+        Row: {
+          accepted_at: string | null
+          accepted_by: string | null
+          broker_id: string
+          commitment_amount: number
+          created_at: string
+          expires_at: string
+          forecast_rate: number
+          id: string
+          lane_from: string
+          lane_to: string
+          miles_estimate: number
+          status: string | null
+          truck_type: Database["public"]["Enums"]["truck_type"]
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          broker_id: string
+          commitment_amount: number
+          created_at?: string
+          expires_at: string
+          forecast_rate: number
+          id?: string
+          lane_from: string
+          lane_to: string
+          miles_estimate: number
+          status?: string | null
+          truck_type: Database["public"]["Enums"]["truck_type"]
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          broker_id?: string
+          commitment_amount?: number
+          created_at?: string
+          expires_at?: string
+          forecast_rate?: number
+          id?: string
+          lane_from?: string
+          lane_to?: string
+          miles_estimate?: number
+          status?: string | null
+          truck_type?: Database["public"]["Enums"]["truck_type"]
+        }
+        Relationships: []
+      }
       ratings: {
         Row: {
           booking_id: string

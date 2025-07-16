@@ -17,3 +17,9 @@ verify_jwt = true
 
 [functions.stripe-webhooks]
 verify_jwt = false
+
+[functions.create-precommitment]
+verify_jwt = true
+
+[functions.accept-precommitment]
+verify_jwt = true
