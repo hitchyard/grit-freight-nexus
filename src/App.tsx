@@ -7,6 +7,10 @@ import HomePage from "./pages/HomePage";
 import BrokerDashboard from "./pages/BrokerDashboard";
 import TruckerDashboard from "./pages/TruckerDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import LoginPage from "./pages/LoginPage";
+import ApplyPage from "./pages/ApplyPage";
+import GetInvitedPage from "./pages/GetInvitedPage";
+import LearnMorePage from "./pages/LearnMorePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,6 +23,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/apply" element={<ApplyPage />} />
+          <Route path="/get-invited" element={<GetInvitedPage />} />
+          <Route path="/learn-more" element={<LearnMorePage />} />
           <Route path="/broker" element={<BrokerDashboard />} />
           <Route path="/trucker" element={<TruckerDashboard />} />
           <Route path="/admin" element={<AdminDashboard />} />
