@@ -87,11 +87,6 @@ export default function HomePage() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img 
-                src="/lovable-uploads/79745459-cb4e-4d64-9fd5-706909b5925b.png" 
-                alt="Hitchyard" 
-                className="h-10 w-auto"
-              />
               <div>
                 <h1 className="text-xl font-bold text-foreground">Hitchyard</h1>
                 <p className="text-sm text-muted-foreground">Load Board for Short Kings</p>
@@ -246,11 +241,6 @@ export default function HomePage() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center gap-3 mb-4 md:mb-0">
-              <img 
-                src="/lovable-uploads/79745459-cb4e-4d64-9fd5-706909b5925b.png" 
-                alt="Hitchyard" 
-                className="h-8 w-auto"
-              />
               <div>
                 <div className="font-bold">Hitchyard</div>
                 <div className="text-sm text-muted-foreground">Load Board for Short Kings</div>

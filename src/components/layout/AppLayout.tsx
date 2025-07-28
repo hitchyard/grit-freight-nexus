@@ -30,12 +30,7 @@ export function AppLayout({ children, userRole }: AppLayoutProps) {
               <div className="flex items-center gap-4">
                 <SidebarTrigger />
                 <div className="flex items-center gap-3">
-                  <img 
-                    src="/lovable-uploads/79745459-cb4e-4d64-9fd5-706909b5925b.png" 
-                    alt="Hitchyard" 
-                    className="h-8 w-auto"
-                  />
-                  <div className="hidden sm:block">
+                  <div>
                     <h1 className="text-lg font-bold text-foreground">Hitchyard</h1>
                     <p className="text-xs text-muted-foreground">Load Board for Short Kings</p>
                   </div>
