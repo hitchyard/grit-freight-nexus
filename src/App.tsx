@@ -4,6 +4,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import FreightFutures from "./pages/FreightFutures";
+import Dashboard from "./pages/Dashboard";
+import ContractPage from "./pages/ContractPage";
+import PricingPage from "./pages/PricingPage";
 import BrokerDashboard from "./pages/BrokerDashboard";
 import TruckerDashboard from "./pages/TruckerDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -27,6 +31,10 @@ const App = () => (
           <Route path="/apply" element={<ApplyPage />} />
           <Route path="/get-invited" element={<GetInvitedPage />} />
           <Route path="/learn-more" element={<LearnMorePage />} />
+          <Route path="/freight-futures" element={<FreightFutures />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/contract/:id" element={<ContractPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
           <Route path="/broker" element={<BrokerDashboard />} />
           <Route path="/trucker" element={<TruckerDashboard />} />
           <Route path="/admin" element={<AdminDashboard />} />

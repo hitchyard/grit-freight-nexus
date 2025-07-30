@@ -228,6 +228,111 @@ export type Database = {
           },
         ]
       }
+      companies: {
+        Row: {
+          address: string | null
+          city: string | null
+          company_type: string | null
+          created_at: string
+          dot_number: string | null
+          email: string | null
+          id: string
+          mc_number: string | null
+          name: string
+          phone: string | null
+          state: string | null
+          updated_at: string
+          zip_code: string | null
+        }
+        Insert: {
+          address?: string | null
+          city?: string | null
+          company_type?: string | null
+          created_at?: string
+          dot_number?: string | null
+          email?: string | null
+          id?: string
+          mc_number?: string | null
+          name: string
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+          zip_code?: string | null
+        }
+        Update: {
+          address?: string | null
+          city?: string | null
+          company_type?: string | null
+          created_at?: string
+          dot_number?: string | null
+          email?: string | null
+          id?: string
+          mc_number?: string | null
+          name?: string
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+          zip_code?: string | null
+        }
+        Relationships: []
+      }
+      contracts: {
+        Row: {
+          broker_amount: number
+          broker_id: string
+          contract_terms: Json | null
+          created_at: string
+          escrow_status: string | null
+          executed_at: string | null
+          future_id: string | null
+          id: string
+          platform_amount: number
+          signed_at: string | null
+          status: string | null
+          stripe_payment_intent_id: string | null
+          total_amount: number
+          trucker_amount: number
+          trucker_id: string
+          updated_at: string
+        }
+        Insert: {
+          broker_amount: number
+          broker_id: string
+          contract_terms?: Json | null
+          created_at?: string
+          escrow_status?: string | null
+          executed_at?: string | null
+          future_id?: string | null
+          id?: string
+          platform_amount: number
+          signed_at?: string | null
+          status?: string | null
+          stripe_payment_intent_id?: string | null
+          total_amount: number
+          trucker_amount: number
+          trucker_id: string
+          updated_at?: string
+        }
+        Update: {
+          broker_amount?: number
+          broker_id?: string
+          contract_terms?: Json | null
+          created_at?: string
+          escrow_status?: string | null
+          executed_at?: string | null
+          future_id?: string | null
+          id?: string
+          platform_amount?: number
+          signed_at?: string | null
+          status?: string | null
+          stripe_payment_intent_id?: string | null
+          total_amount?: number
+          trucker_amount?: number
+          trucker_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       events: {
         Row: {
           created_at: string
@@ -265,6 +370,63 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      futures: {
+        Row: {
+          ai_confidence_score: number | null
+          created_at: string
+          created_by: string
+          end_date: string
+          estimated_miles: number
+          id: string
+          lane_from: string
+          lane_to: string
+          market_demand: string | null
+          matched_with: string | null
+          rate_per_mile: number
+          start_date: string
+          status: string | null
+          total_commitment: number
+          truck_type: string
+          updated_at: string
+        }
+        Insert: {
+          ai_confidence_score?: number | null
+          created_at?: string
+          created_by: string
+          end_date: string
+          estimated_miles: number
+          id?: string
+          lane_from: string
+          lane_to: string
+          market_demand?: string | null
+          matched_with?: string | null
+          rate_per_mile: number
+          start_date: string
+          status?: string | null
+          total_commitment: number
+          truck_type: string
+          updated_at?: string
+        }
+        Update: {
+          ai_confidence_score?: number | null
+          created_at?: string
+          created_by?: string
+          end_date?: string
+          estimated_miles?: number
+          id?: string
+          lane_from?: string
+          lane_to?: string
+          market_demand?: string | null
+          matched_with?: string | null
+          rate_per_mile?: number
+          start_date?: string
+          status?: string | null
+          total_commitment?: number
+          truck_type?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       load_payments: {
         Row: {
@@ -476,6 +638,72 @@ export type Database = {
           },
         ]
       }
+      messages: {
+        Row: {
+          content: string
+          contract_id: string | null
+          created_at: string
+          id: string
+          message_type: string | null
+          read_at: string | null
+          recipient_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          contract_id?: string | null
+          created_at?: string
+          id?: string
+          message_type?: string | null
+          read_at?: string | null
+          recipient_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          contract_id?: string | null
+          created_at?: string
+          id?: string
+          message_type?: string | null
+          read_at?: string | null
+          recipient_id?: string
+          sender_id?: string
+        }
+        Relationships: []
+      }
+      payouts: {
+        Row: {
+          amount: number
+          contract_id: string
+          created_at: string
+          id: string
+          payout_date: string | null
+          recipient_id: string
+          status: string | null
+          stripe_transfer_id: string | null
+        }
+        Insert: {
+          amount: number
+          contract_id: string
+          created_at?: string
+          id?: string
+          payout_date?: string | null
+          recipient_id: string
+          status?: string | null
+          stripe_transfer_id?: string | null
+        }
+        Update: {
+          amount?: number
+          contract_id?: string
+          created_at?: string
+          id?: string
+          payout_date?: string | null
+          recipient_id?: string
+          status?: string | null
+          stripe_transfer_id?: string | null
+        }
+        Relationships: []
+      }
       precommitments: {
         Row: {
           accepted_at: string | null
@@ -521,6 +749,48 @@ export type Database = {
           miles_estimate?: number
           status?: string | null
           truck_type?: Database["public"]["Enums"]["truck_type"]
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          company_id: string | null
+          created_at: string
+          first_name: string | null
+          id: string
+          last_name: string | null
+          onboarding_complete: boolean | null
+          phone: string | null
+          role: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          company_id?: string | null
+          created_at?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          onboarding_complete?: boolean | null
+          phone?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          company_id?: string | null
+          created_at?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          onboarding_complete?: boolean | null
+          phone?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -761,6 +1031,14 @@ export type Database = {
       binary_quantize: {
         Args: { "": string } | { "": unknown }
         Returns: unknown
+      }
+      calculate_commission_split: {
+        Args: { total_amount: number }
+        Returns: {
+          trucker_amount: number
+          broker_amount: number
+          platform_amount: number
+        }[]
       }
       expire_old_loads: {
         Args: Record<PropertyKey, never>
