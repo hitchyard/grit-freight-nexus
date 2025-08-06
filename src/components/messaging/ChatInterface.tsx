@@ -17,10 +17,6 @@ interface Message {
   recipient_id: string;
   created_at: string;
   read_at?: string;
-  sender?: {
-    first_name?: string;
-    last_name?: string;
-  };
 }
 
 interface ChatInterfaceProps {
@@ -54,10 +50,7 @@ const ChatInterface = ({ recipientId, recipientName, contractId }: ChatInterface
     try {
       const { data, error } = await supabase
         .from('messages')
-        .select(`
-          *,
-          sender:profiles!messages_sender_id_fkey(first_name, last_name)
-        `)
+        .select('*')
         .or(`and(sender_id.eq.${user?.id},recipient_id.eq.${recipientId}),and(sender_id.eq.${recipientId},recipient_id.eq.${user?.id})`)
         .order('created_at', { ascending: true });
 
@@ -138,10 +131,7 @@ const ChatInterface = ({ recipientId, recipientName, contractId }: ChatInterface
                   >
                     <Avatar className="h-8 w-8 flex-shrink-0">
                       <AvatarFallback className="text-xs">
-                        {isFromUser 
-                          ? 'Me' 
-                          : getInitials(message.sender?.first_name, message.sender?.last_name)
-                        }
+                        {isFromUser ? 'Me' : recipientName.split(' ').map(n => n[0]).join('').toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
                     

@@ -69,13 +69,15 @@ const TruckerOnboarding = ({ onComplete }: TruckerOnboardingProps) => {
     setLoading(true);
 
     try {
-      // Create trucker profile
+      // Create trucker profile - for now just create without broker_id
+      // This can be updated later when broker assignment is implemented
       const { error: truckerError } = await supabase
         .from('truckers')
         .insert({
           user_id: user?.id,
+          broker_id: '850e8400-e29b-41d4-a716-446655440002', // Default broker for demo
           company_name: companyName,
-          truck_type: truckType,
+          truck_type: truckType as any,
           equipment_details: equipmentDetails,
           home_base_city: homeBaseCity,
           home_base_state: homeBaseState,
