@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import Stripe from "https://esm.sh/stripe@14.21.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import Stripe from "https://esm.sh/stripe@14.21.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -22,7 +22,8 @@ serve(async (req) => {
 
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      { auth: { persistSession: false } }
     );
 
     const authHeader = req.headers.get("Authorization");
@@ -30,75 +31,116 @@ serve(async (req) => {
 
     const token = authHeader.replace("Bearer ", "");
     const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
-    if (userError) throw new Error(`Authentication error: ${userError.message}`);
-    
-    const user = userData.user;
-    if (!user) throw new Error("User not authenticated");
-    logStep("User authenticated", { userId: user.id });
+    if (userError || !userData.user) {
+      throw new Error("Invalid authentication token");
+    }
 
-    const body = await req.json();
-    const { lane_from, lane_to, truck_type, forecast_rate, miles_estimate, expires_at } = body;
+    logStep("User authenticated", { userId: userData.user.id });
 
+    const { 
+      lane_from, 
+      lane_to, 
+      truck_type, 
+      forecast_rate, 
+      miles_estimate, 
+      expires_at 
+    } = await req.json();
+
+    logStep("Request data received", { 
+      lane_from, 
+      lane_to, 
+      truck_type, 
+      forecast_rate, 
+      miles_estimate, 
+      expires_at 
+    });
+
+    // Validate required fields
     if (!lane_from || !lane_to || !truck_type || !forecast_rate || !miles_estimate || !expires_at) {
       throw new Error("Missing required fields");
     }
 
-    const commitment_amount = forecast_rate * miles_estimate;
-    logStep("Calculated commitment amount", { commitment_amount, forecast_rate, miles_estimate });
+    // Calculate commitment amount (10% of total estimated value)
+    const totalEstimatedValue = forecast_rate * miles_estimate;
+    const commitmentAmount = totalEstimatedValue * 0.10;
+
+    logStep("Calculated commitment", { 
+      totalEstimatedValue, 
+      commitmentAmount 
+    });
 
     // Initialize Stripe
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-    if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
-    
-    const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
+      apiVersion: "2023-10-16",
+    });
 
-    // Create Stripe PaymentIntent
+    // Create payment intent for the commitment amount
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(commitment_amount * 100), // in cents
-      currency: 'usd',
-      metadata: { 
-        type: 'precommitment', 
-        broker_id: user.id,
+      amount: Math.round(commitmentAmount * 100), // Convert to cents
+      currency: "usd",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+      metadata: {
+        type: "precommitment",
+        user_id: userData.user.id,
         lane_from,
         lane_to,
-        truck_type
+        truck_type,
       },
     });
-    logStep("Created Stripe PaymentIntent", { paymentIntentId: paymentIntent.id });
+
+    logStep("Stripe payment intent created", { 
+      paymentIntentId: paymentIntent.id,
+      amount: paymentIntent.amount 
+    });
 
     // Insert precommitment into database
-    const { data, error } = await supabaseClient.from('precommitments').insert({
-      broker_id: user.id,
-      lane_from,
-      lane_to,
-      truck_type,
-      forecast_rate,
-      miles_estimate,
-      commitment_amount,
-      expires_at
-    }).select().single();
+    const { data: precommitment, error: insertError } = await supabaseClient
+      .from("precommitments")
+      .insert({
+        broker_id: userData.user.id,
+        lane_from,
+        lane_to,
+        truck_type,
+        forecast_rate,
+        miles_estimate,
+        commitment_amount: commitmentAmount,
+        expires_at,
+        status: 'open'
+      })
+      .select()
+      .single();
 
-    if (error) {
-      logStep("Database insert error", { error });
-      throw new Error(`Database error: ${error.message}`);
+    if (insertError) {
+      logStep("Database insert error", insertError);
+      throw insertError;
     }
 
-    logStep("Successfully created precommitment", { precommitmentId: data.id });
-
-    return new Response(JSON.stringify({ 
-      payment_intent: paymentIntent.client_secret, 
-      precommitment: data 
-    }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
+    logStep("Precommitment created successfully", { 
+      precommitmentId: precommitment.id 
     });
 
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    logStep("ERROR in create-precommitment", { message: errorMessage });
-    return new Response(JSON.stringify({ error: errorMessage }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({
+        precommitment,
+        client_secret: paymentIntent.client_secret,
+        payment_intent_id: paymentIntent.id
+      }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      }
+    );
+
+  } catch (error: any) {
+    logStep("ERROR", error.message);
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
   }
 });

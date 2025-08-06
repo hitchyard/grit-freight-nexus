@@ -1,221 +1,272 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, DollarSign, TrendingUp, Shield, Zap } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Check, DollarSign, Shield, Zap, Clock, Users, TrendingUp, Star } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
 
 export default function PricingPage() {
+  const features = [
+    {
+      icon: Shield,
+      title: "Escrow Protection",
+      description: "Secure payments held in escrow until delivery completion"
+    },
+    {
+      icon: Zap,
+      title: "AI Matching",
+      description: "Smart algorithms match optimal loads to carrier preferences"
+    },
+    {
+      icon: Clock,
+      title: "Freight Futures",
+      description: "Pre-commit to lanes and lock in guaranteed rates"
+    },
+    {
+      icon: Users,
+      title: "Instant Payouts",
+      description: "Get paid within 24 hours via Stripe Connect"
+    }
+  ];
+
+  const commissionBreakdown = [
+    { role: "Trucker", percentage: 80, amount: "$800", color: "text-primary" },
+    { role: "Broker", percentage: 10, amount: "$100", color: "text-warning" },
+    { role: "Hitchyard", percentage: 10, amount: "$100", color: "text-muted-foreground" }
+  ];
+
+  const comparisons = [
+    {
+      feature: "Commission Rate",
+      hitchyard: "10% flat",
+      traditional: "15-25%",
+      advantage: true
+    },
+    {
+      feature: "Payment Speed",
+      hitchyard: "24 hours",
+      traditional: "30-90 days",
+      advantage: true
+    },
+    {
+      feature: "Ghost Loads",
+      hitchyard: "Zero",
+      traditional: "Common",
+      advantage: true
+    },
+    {
+      feature: "AI Matching",
+      hitchyard: "Yes",
+      traditional: "Manual",
+      advantage: true
+    },
+    {
+      feature: "Verified Users",
+      hitchyard: "100%",
+      traditional: "No verification",
+      advantage: true
+    }
+  ];
+
+  const whatsIncluded = [
+    "AI-powered load matching",
+    "Secure escrow payments",
+    "Real-time messaging",
+    "Freight futures trading",
+    "24/7 customer support",
+    "Mobile app access",
+    "Performance analytics",
+    "Instant notifications"
+  ];
+
   return (
     <AppLayout>
-      <div className="p-6 space-y-8 max-w-6xl mx-auto">
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold">Simple, Transparent Pricing</h1>
-          <p className="text-xl text-muted-foreground">
-            Only pay when you complete a successful freight deal
+      <div className="container mx-auto px-4 py-12 space-y-16">
+        {/* Hero Section */}
+        <div className="text-center space-y-6">
+          <Badge className="bg-primary/10 text-primary border-primary/20">
+            Transparent Pricing
+          </Badge>
+          <h1 className="text-4xl md:text-6xl font-bold">
+            <span className="text-primary">10%</span> Flat Commission
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Simple, transparent pricing with no hidden fees. 
+            Pay only when you successfully complete a deal.
           </p>
         </div>
 
-        {/* Commission Structure */}
-        <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-          <CardHeader>
-            <CardTitle className="text-center text-2xl">10% Flat Commission</CardTitle>
-            <p className="text-center text-muted-foreground">
-              Taken only on successfully completed freight deals
-            </p>
+        {/* Commission Breakdown */}
+        <Card className="max-w-4xl mx-auto industrial-shadow">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl">How Revenue is Split</CardTitle>
+            <CardDescription>
+              Fair distribution on every $1,000 load
+            </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-white/50 rounded-lg">
-                <div className="text-3xl font-bold text-green-600 mb-2">80%</div>
-                <div className="font-medium">Trucker</div>
-                <div className="text-sm text-muted-foreground">You keep the majority</div>
-              </div>
-              <div className="text-center p-6 bg-white/50 rounded-lg">
-                <div className="text-3xl font-bold text-blue-600 mb-2">10%</div>
-                <div className="font-medium">Broker</div>
-                <div className="text-sm text-muted-foreground">Fair broker fee</div>
-              </div>
-              <div className="text-center p-6 bg-white/50 rounded-lg">
-                <div className="text-3xl font-bold text-purple-600 mb-2">10%</div>
-                <div className="font-medium">Hitchyard</div>
-                <div className="text-sm text-muted-foreground">Platform fee</div>
-              </div>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {commissionBreakdown.map((item, index) => (
+                <div key={index} className="text-center space-y-3">
+                  <div className={`text-4xl font-bold ${item.color}`}>
+                    {item.percentage}%
+                  </div>
+                  <div className="font-medium text-lg">{item.role}</div>
+                  <div className={`text-2xl font-bold ${item.color}`}>
+                    {item.amount}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {item.role === "Trucker" && "Keep the majority of your earnings"}
+                    {item.role === "Broker" && "Fair commission for sourcing"}
+                    {item.role === "Hitchyard" && "Platform & infrastructure"}
+                  </div>
+                </div>
+              ))}
             </div>
-
-            <div className="text-center">
-              <p className="text-muted-foreground">
-                Example: On a $2,500 load, truckers earn $2,000, brokers earn $250, and Hitchyard takes $250
-              </p>
+            <div className="mt-8 p-4 bg-accent/50 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <DollarSign className="h-4 w-4" />
+                Example based on $1,000 load. Commission only applies to successful deals.
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Features Included */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card>
-            <CardHeader>
-              <Shield className="h-8 w-8 text-green-600 mb-2" />
-              <CardTitle className="text-lg">Escrow Protection</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                All payments secured in escrow until delivery confirmation
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <Zap className="h-8 w-8 text-blue-600 mb-2" />
-              <CardTitle className="text-lg">AI Matching</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Smart algorithms match you with optimal freight opportunities
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <TrendingUp className="h-8 w-8 text-purple-600 mb-2" />
-              <CardTitle className="text-lg">Freight Futures</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Pre-commit to lanes and secure guaranteed rates
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <DollarSign className="h-8 w-8 text-yellow-600 mb-2" />
-              <CardTitle className="text-lg">Instant Payouts</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Get paid immediately upon delivery confirmation
-              </p>
-            </CardContent>
-          </Card>
+        {/* Key Features */}
+        <div className="space-y-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold">Why Choose Hitchyard?</h2>
+            <p className="text-muted-foreground mt-2">
+              Built for the modern freight industry
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <Card key={index} className="industrial-shadow">
+                <CardHeader className="text-center">
+                  <feature.icon className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <CardTitle className="text-lg">{feature.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground text-center">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* What's Included */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Everything You Need</CardTitle>
-            <p className="text-muted-foreground">
-              No hidden fees, no monthly subscriptions, no setup costs
+        <Card className="max-w-2xl mx-auto industrial-shadow">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl">What's Included</CardTitle>
+            <CardDescription>
+              Everything you need to succeed
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {whatsIncluded.map((item, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <Check className="h-5 w-5 text-primary flex-shrink-0" />
+                  <span className="text-sm">{item}</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Comparison Table */}
+        <div className="space-y-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold">Hitchyard vs Traditional Brokers</h2>
+            <p className="text-muted-foreground mt-2">
+              See how we stack up against the competition
             </p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>Unlimited load postings</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>AI-powered matching</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>Real-time chat with partners</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>Digital contract management</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>Automatic payment processing</span>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>Freight futures trading</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>Performance analytics</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>Rating and review system</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>24/7 customer support</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 text-green-600" />
-                  <span>Mobile app access</span>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Comparison */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Why Choose Hitchyard?</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left py-3">Feature</th>
-                    <th className="text-center py-3">Traditional Brokers</th>
-                    <th className="text-center py-3 text-primary font-bold">Hitchyard</th>
-                  </tr>
-                </thead>
-                <tbody className="space-y-2">
-                  <tr className="border-b">
-                    <td className="py-3">Commission Rate</td>
-                    <td className="text-center py-3">15-25%</td>
-                    <td className="text-center py-3 font-bold text-green-600">10%</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3">Payment Terms</td>
-                    <td className="text-center py-3">30-60 days</td>
-                    <td className="text-center py-3 font-bold text-green-600">Instant</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3">Load Matching</td>
-                    <td className="text-center py-3">Manual</td>
-                    <td className="text-center py-3 font-bold text-green-600">AI-Powered</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3">Freight Futures</td>
-                    <td className="text-center py-3">❌</td>
-                    <td className="text-center py-3 font-bold text-green-600">✅</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3">Transparent Pricing</td>
-                    <td className="text-center py-3">❌</td>
-                    <td className="text-center py-3 font-bold text-green-600">✅</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* CTA */}
-        <div className="text-center space-y-4">
-          <h2 className="text-2xl font-bold">Ready to Start Earning More?</h2>
-          <p className="text-muted-foreground">
-            Join thousands of truckers and brokers already using Hitchyard
-          </p>
-          <div className="space-x-4">
-            <Button size="lg">Get Started Today</Button>
-            <Button variant="outline" size="lg">Learn More</Button>
           </div>
+          <Card className="max-w-4xl mx-auto industrial-shadow">
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left p-4 font-medium">Feature</th>
+                      <th className="text-center p-4 font-medium text-primary">Hitchyard</th>
+                      <th className="text-center p-4 font-medium">Traditional Brokers</th>
+                      <th className="text-center p-4 font-medium">Advantage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {comparisons.map((item, index) => (
+                      <tr key={index} className="border-b last:border-b-0 hover:bg-accent/30">
+                        <td className="p-4 font-medium">{item.feature}</td>
+                        <td className="p-4 text-center text-primary font-medium">
+                          {item.hitchyard}
+                        </td>
+                        <td className="p-4 text-center text-muted-foreground">
+                          {item.traditional}
+                        </td>
+                        <td className="p-4 text-center">
+                          {item.advantage && (
+                            <Badge className="bg-primary/10 text-primary">
+                              Hitchyard
+                            </Badge>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
         </div>
+
+        {/* Social Proof */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <Card className="industrial-shadow text-center">
+            <CardContent className="p-6">
+              <TrendingUp className="h-8 w-8 text-primary mx-auto mb-3" />
+              <div className="text-2xl font-bold">2.5x</div>
+              <div className="text-sm text-muted-foreground">Faster payments</div>
+            </CardContent>
+          </Card>
+          <Card className="industrial-shadow text-center">
+            <CardContent className="p-6">
+              <Shield className="h-8 w-8 text-primary mx-auto mb-3" />
+              <div className="text-2xl font-bold">100%</div>
+              <div className="text-sm text-muted-foreground">Payment guarantee</div>
+            </CardContent>
+          </Card>
+          <Card className="industrial-shadow text-center">
+            <CardContent className="p-6">
+              <Star className="h-8 w-8 text-primary mx-auto mb-3" />
+              <div className="text-2xl font-bold">4.9/5</div>
+              <div className="text-sm text-muted-foreground">User satisfaction</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* CTA Section */}
+        <Card className="max-w-2xl mx-auto industrial-shadow bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
+          <CardContent className="p-8 text-center space-y-6">
+            <h3 className="text-2xl font-bold">Ready to Get Started?</h3>
+            <p className="text-muted-foreground">
+              Join the future of freight with transparent pricing and guaranteed payments.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="gap-2">
+                Sign Up as Trucker
+              </Button>
+              <Button variant="outline" size="lg" className="gap-2">
+                Sign Up as Broker
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              No setup fees • No monthly fees • Only pay on successful deals
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </AppLayout>
   );

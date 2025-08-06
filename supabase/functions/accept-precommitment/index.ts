@@ -21,7 +21,8 @@ serve(async (req) => {
 
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      { auth: { persistSession: false } }
     );
 
     const authHeader = req.headers.get("Authorization");
@@ -29,76 +30,76 @@ serve(async (req) => {
 
     const token = authHeader.replace("Bearer ", "");
     const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
-    if (userError) throw new Error(`Authentication error: ${userError.message}`);
-    
-    const user = userData.user;
-    if (!user) throw new Error("User not authenticated");
-    logStep("User authenticated", { userId: user.id });
-
-    // Verify user is a trucker
-    const { data: trucker, error: truckerError } = await supabaseClient
-      .from('truckers')
-      .select('id')
-      .eq('user_id', user.id)
-      .single();
-
-    if (truckerError || !trucker) {
-      throw new Error("Only truckers can accept precommitments");
+    if (userError || !userData.user) {
+      throw new Error("Invalid authentication token");
     }
-    logStep("Verified trucker", { truckerId: trucker.id });
 
-    const body = await req.json();
-    const { precommitment_id } = body;
+    logStep("User authenticated", { userId: userData.user.id });
+
+    const { precommitment_id } = await req.json();
+
+    logStep("Request data received", { precommitment_id });
 
     if (!precommitment_id) {
       throw new Error("Missing precommitment_id");
     }
 
-    // Update precommitment to accepted status
-    const { data, error } = await supabaseClient
-      .from('precommitments')
-      .update({
-        status: 'accepted',
-        accepted_by: user.id,
-        accepted_at: new Date().toISOString()
-      })
-      .eq('id', precommitment_id)
-      .eq('status', 'open') // Only accept if still open
-      .select()
+    // Get the precommitment
+    const { data: precommitment, error: fetchError } = await supabaseClient
+      .from("precommitments")
+      .select("*")
+      .eq("id", precommitment_id)
+      .eq("status", "open")
       .single();
 
-    if (error) {
-      logStep("Database update error", { error });
-      throw new Error(`Database error: ${error.message}`);
-    }
-
-    if (!data) {
+    if (fetchError || !precommitment) {
       throw new Error("Precommitment not found or already accepted");
     }
 
-    logStep("Successfully accepted precommitment", { 
-      precommitmentId: data.id, 
-      acceptedBy: user.id 
+    logStep("Precommitment found", { precommitmentId: precommitment.id });
+
+    // Update precommitment with trucker acceptance
+    const { data: updatedPrecommitment, error: updateError } = await supabaseClient
+      .from("precommitments")
+      .update({
+        accepted_by: userData.user.id,
+        accepted_at: new Date().toISOString(),
+        status: "accepted"
+      })
+      .eq("id", precommitment_id)
+      .eq("status", "open") // Ensure it's still open
+      .select()
+      .single();
+
+    if (updateError) {
+      logStep("Update error", updateError);
+      throw new Error("Failed to accept precommitment - it may have been accepted by another trucker");
+    }
+
+    logStep("Precommitment accepted successfully", { 
+      acceptedBy: userData.user.id,
+      precommitmentId: updatedPrecommitment.id 
     });
 
-    // TODO: Trigger Stripe payment release logic here
-    // This would involve updating the PaymentIntent to transfer funds
-    
-    return new Response(JSON.stringify({ 
-      success: true,
-      precommitment: data,
-      message: "Precommitment accepted successfully"
-    }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
+    return new Response(
+      JSON.stringify({
+        success: true,
+        precommitment: updatedPrecommitment
+      }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      }
+    );
 
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    logStep("ERROR in accept-precommitment", { message: errorMessage });
-    return new Response(JSON.stringify({ error: errorMessage }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
-    });
+  } catch (error: any) {
+    logStep("ERROR", error.message);
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
   }
 });

@@ -18,8 +18,20 @@ verify_jwt = true
 [functions.stripe-webhooks]
 verify_jwt = false
 
+[functions.handle-stripe-webhook]
+verify_jwt = false
+
 [functions.create-precommitment]
 verify_jwt = true
 
 [functions.accept-precommitment]
 verify_jwt = true
+
+[functions.generate-contract]
+verify_jwt = true
+
+[functions.create-freight-future]
+verify_jwt = true
+
+[functions.send-email]
+verify_jwt = false
