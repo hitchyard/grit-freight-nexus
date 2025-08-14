@@ -7,28 +7,28 @@
 
 @layer base {
   :root {
-    /* Hitchyard Premium Theme - Refined Abercrombie-inspired Palette */
+    /* Hitchyard Clean Theme - Minimal Abercrombie-inspired Palette */
     /* Base */
-    --background: 46 33% 95%; /* Warm Cream #F9F6F1 */
-    --foreground: 0 0% 20%;   /* Rich Charcoal #333333 */
+    --background: 0 0% 100%; /* Pure White #FFFFFF */
+    --foreground: 0 0% 13%;   /* Near-black #222222 */
 
     /* Surfaces */
-    --card: 46 33% 97%;
-    --card-foreground: 0 0% 20%;
-    --popover: 46 33% 97%;
-    --popover-foreground: 0 0% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
 
     /* Brand - Aegean Blue as primary */
     --primary: 214 31% 26%;   /* Aegean Blue #2E4057 */
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Burnt Sienna for actions */
-    --secondary: 22 48% 44%;  /* Burnt Sienna #A65B38 */
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary - Abercrombie Gray for subtle elements */
+    --secondary: 60 3% 69%;  /* Abercrombie Gray #B1B1AE */
+    --secondary-foreground: 0 0% 13%;
 
-    /* Muted/secondary text and subtle UI */
-    --muted: 46 25% 91%;
-    --muted-foreground: 0 0% 44%; /* Muted Gray #707070 */
+    /* Muted/secondary backgrounds and subtle UI */
+    --muted: 60 5% 90%;      /* Very light Abercrombie Gray #E5E5E3 */
+    --muted-foreground: 60 3% 69%; /* Abercrombie Gray #B1B1AE */
 
     /* Accent links and interactive accents */
     --accent: 214 31% 26%;    /* Aegean Blue #2E4057 */
@@ -42,32 +42,32 @@
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 10%;
 
-    --border: 46 15% 80%;
-    --input: 46 15% 80%;
-    --ring: 214 31% 26%;
+    --border: 60 3% 69%;     /* Abercrombie Gray borders */
+    --input: 60 5% 90%;      /* Light gray input backgrounds */
+    --ring: 214 31% 26%;     /* Aegean Blue focus rings */
 
     --radius: 0.5rem;
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(214 31% 26%), hsl(214 31% 22%));
-    --gradient-dark: linear-gradient(135deg, hsl(46 33% 97%), hsl(46 33% 95%));
-    --gradient-glow: linear-gradient(135deg, hsl(214 31% 26% / 0.10), hsl(214 31% 26% / 0.06));
+    --gradient-light: linear-gradient(135deg, hsl(0 0% 100%), hsl(60 5% 95%));
+    --gradient-glow: linear-gradient(135deg, hsl(214 31% 26% / 0.08), hsl(214 31% 26% / 0.04));
 
     /* Shadows */
-    --shadow-glow: 0 0 40px hsl(214 31% 26% / 0.25);
-    --shadow-industrial: 0 10px 30px -10px hsl(0 0% 0% / 0.15);
+    --shadow-glow: 0 0 40px hsl(214 31% 26% / 0.15);
+    --shadow-minimal: 0 2px 10px -2px hsl(0 0% 0% / 0.08);
 
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Sidebar */
-    --sidebar-background: 46 33% 95%;
-    --sidebar-foreground: 0 0% 25%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 13%;
     --sidebar-primary: 214 31% 26%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 46 25% 91%;
-    --sidebar-accent-foreground: 0 0% 25%;
-    --sidebar-border: 46 15% 80%;
+    --sidebar-accent: 60 5% 90%;
+    --sidebar-accent-foreground: 0 0% 13%;
+    --sidebar-border: 60 3% 69%;
     --sidebar-ring: 214 31% 26%;
   }
 }
