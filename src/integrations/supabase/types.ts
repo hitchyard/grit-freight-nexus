@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -143,6 +143,105 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      broker_applications: {
+        Row: {
+          address: string
+          admin_notes: string | null
+          city: string
+          company_name: string
+          created_at: string
+          dot_number: string | null
+          email: string
+          experience: string | null
+          first_name: string
+          fmcsa_address: string | null
+          fmcsa_bond_compliant: boolean | null
+          fmcsa_dba_name: string | null
+          fmcsa_insurance_compliant: boolean | null
+          fmcsa_legal_name: string | null
+          fmcsa_operating_status: string | null
+          fmcsa_raw_response: Json | null
+          fmcsa_status: string | null
+          fmcsa_verification_timestamp: string | null
+          fmcsa_verified: boolean | null
+          id: string
+          last_name: string
+          mc_number: string | null
+          phone: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          state: string
+          status: string
+          updated_at: string
+          user_id: string | null
+          zip_code: string
+        }
+        Insert: {
+          address: string
+          admin_notes?: string | null
+          city: string
+          company_name: string
+          created_at?: string
+          dot_number?: string | null
+          email: string
+          experience?: string | null
+          first_name: string
+          fmcsa_address?: string | null
+          fmcsa_bond_compliant?: boolean | null
+          fmcsa_dba_name?: string | null
+          fmcsa_insurance_compliant?: boolean | null
+          fmcsa_legal_name?: string | null
+          fmcsa_operating_status?: string | null
+          fmcsa_raw_response?: Json | null
+          fmcsa_status?: string | null
+          fmcsa_verification_timestamp?: string | null
+          fmcsa_verified?: boolean | null
+          id?: string
+          last_name: string
+          mc_number?: string | null
+          phone: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          zip_code: string
+        }
+        Update: {
+          address?: string
+          admin_notes?: string | null
+          city?: string
+          company_name?: string
+          created_at?: string
+          dot_number?: string | null
+          email?: string
+          experience?: string | null
+          first_name?: string
+          fmcsa_address?: string | null
+          fmcsa_bond_compliant?: boolean | null
+          fmcsa_dba_name?: string | null
+          fmcsa_insurance_compliant?: boolean | null
+          fmcsa_legal_name?: string | null
+          fmcsa_operating_status?: string | null
+          fmcsa_raw_response?: Json | null
+          fmcsa_status?: string | null
+          fmcsa_verification_timestamp?: string | null
+          fmcsa_verified?: boolean | null
+          id?: string
+          last_name?: string
+          mc_number?: string | null
+          phone?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state?: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          zip_code?: string
+        }
+        Relationships: []
       }
       brokers: {
         Row: {
@@ -1035,9 +1134,9 @@ export type Database = {
       calculate_commission_split: {
         Args: { total_amount: number }
         Returns: {
-          trucker_amount: number
           broker_amount: number
           platform_amount: number
+          trucker_amount: number
         }[]
       }
       expire_old_loads: {
@@ -1046,39 +1145,39 @@ export type Database = {
       }
       find_matching_loads: {
         Args: {
-          trucker_vector: string
           similarity_threshold?: number
           trucker_broker_id?: string
+          trucker_vector: string
         }
         Returns: {
-          id: string
-          title: string
-          description: string
-          pickup_city: string
-          pickup_state: string
           delivery_city: string
           delivery_state: string
-          truck_type: Database["public"]["Enums"]["truck_type"]
-          rate: number
+          description: string
           distance_miles: number
+          id: string
+          pickup_city: string
+          pickup_state: string
+          rate: number
           similarity: number
+          title: string
+          truck_type: Database["public"]["Enums"]["truck_type"]
         }[]
       }
       find_matching_truckers: {
         Args: {
+          load_broker_id?: string
           load_vector: string
           similarity_threshold?: number
-          load_broker_id?: string
         }
         Returns: {
-          id: string
+          average_rating: number
           company_name: string
-          truck_type: Database["public"]["Enums"]["truck_type"]
           home_base_city: string
           home_base_state: string
+          id: string
           rate_per_mile_min: number
-          average_rating: number
           similarity: number
+          truck_type: Database["public"]["Enums"]["truck_type"]
         }[]
       }
       halfvec_avg: {

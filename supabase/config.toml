@@ -35,3 +35,12 @@ verify_jwt = true
 
 [functions.send-email]
 verify_jwt = false
+
+[functions.fmcsa-verify-broker]
+verify_jwt = false
+
+[functions.send-broker-notification]
+verify_jwt = false
+
+[functions.periodic-broker-reverification]
+verify_jwt = false

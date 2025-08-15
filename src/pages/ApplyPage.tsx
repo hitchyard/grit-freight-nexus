@@ -49,11 +49,15 @@ export default function ApplyPage() {
       if (authError) throw authError;
 
       if (authData.user) {
-        // Create broker profile
-        const { error: brokerError } = await supabase
-          .from('brokers')
+        // Create broker application (new table for verification workflow)
+        const { data: applicationData, error: applicationError } = await supabase
+          .from('broker_applications')
           .insert({
             user_id: authData.user.id,
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
             company_name: formData.companyName,
             mc_number: formData.mcNumber,
             dot_number: formData.dotNumber,
@@ -61,15 +65,42 @@ export default function ApplyPage() {
             city: formData.city,
             state: formData.state,
             zip_code: formData.zipCode,
+            experience: formData.experience,
             status: 'pending'
+          })
+          .select()
+          .single();
+
+        if (applicationError) throw applicationError;
+
+        // Trigger FMCSA verification automatically
+        if (applicationData && (formData.mcNumber || formData.dotNumber)) {
+          try {
+            await supabase.functions.invoke('fmcsa-verify-broker', {
+              body: {
+                applicationId: applicationData.id,
+                mcNumber: formData.mcNumber,
+                dotNumber: formData.dotNumber,
+              },
+            });
+            
+            toast({
+              title: "Application Submitted!",
+              description: "We're verifying your information with FMCSA. You'll receive an email with the results shortly.",
+            });
+          } catch (verificationError) {
+            console.error('Verification error:', verificationError);
+            toast({
+              title: "Application Submitted!",
+              description: "Your application is submitted. Verification is pending - we'll notify you of the results.",
+            });
+          }
+        } else {
+          toast({
+            title: "Application Submitted!",
+            description: "We'll review your application and get back to you within 24 hours.",
           });
-
-        if (brokerError) throw brokerError;
-
-        toast({
-          title: "Application Submitted!",
-          description: "We'll review your application and get back to you within 24 hours.",
-        });
+        }
 
         navigate("/");
       }
