@@ -7,32 +7,32 @@
 
 @layer base {
   :root {
-    /* Hitchyard Dynamic Theme - Logistics Industry Palette */
+    /* Hitchyard Optimized Color Palette - Load Board Design */
     /* Base */
-    --background: 0 0% 100%; /* Pure White #FFFFFF */
-    --foreground: 0 0% 10%;   /* Deep Charcoal #1A1A1A */
+    --background: 0 0% 97%; /* Off-White #F8F8F8 */
+    --foreground: 0 0% 17%;   /* Charcoal #2C2C2C */
 
     /* Surfaces */
     --card: 0 0% 100%;        /* Pure White for cards */
-    --card-foreground: 0 0% 20%;
+    --card-foreground: 0 0% 17%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 20%;
+    --popover-foreground: 0 0% 17%;
 
     /* Brand - Aegean Blue as primary */
-    --primary: 214 31% 26%;   /* Aegean Blue #2E4057 */
+    --primary: 205 63% 34%;   /* Aegean Blue #1F5B8C */
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 214 31% 32%; /* Lighter Aegean Blue #3A4A67 */
+    --primary-hover: 205 63% 40%; /* Lighter Aegean Blue */
 
     /* Secondary - Burnt Sienna for dynamic accents */
-    --secondary: 17 49% 44%;  /* Burnt Sienna #A65B38 */
+    --secondary: 20 100% 41%;  /* Burnt Sienna #D35400 */
     --secondary-foreground: 0 0% 100%;
 
     /* Muted/secondary backgrounds and subtle UI */
-    --muted: 60 3% 69%;      /* Abercrombie Gray #B1B1AE */
-    --muted-foreground: 0 0% 20%; /* Rich Charcoal */
+    --muted: 0 0% 90%;      /* Light Gray */
+    --muted-foreground: 0 0% 17%; /* Charcoal */
 
     /* Accent links and interactive accents */
-    --accent: 17 49% 44%;    /* Burnt Sienna #A65B38 */
+    --accent: 20 100% 41%;    /* Burnt Sienna #D35400 */
     --accent-foreground: 0 0% 100%;
 
     /* System */
@@ -43,21 +43,21 @@
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 10%;
 
-    --border: 60 3% 69%;     /* Abercrombie Gray borders */
+    --border: 0 0% 90%;     /* Light Gray borders */
     --input: 0 0% 100%;      /* Pure White input backgrounds */
-    --ring: 214 31% 26%;     /* Aegean Blue focus rings */
+    --ring: 205 63% 34%;     /* Aegean Blue focus rings */
 
     --radius: 0.5rem;
 
     /* Enhanced Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(214 31% 26%), hsl(214 31% 32%));
-    --gradient-accent: linear-gradient(135deg, hsl(17 49% 44%), hsl(17 49% 50%));
-    --gradient-hero: linear-gradient(135deg, hsl(43 50% 96%), hsl(43 50% 92%));
-    --gradient-glow: linear-gradient(135deg, hsl(214 31% 26% / 0.12), hsl(17 49% 44% / 0.08));
+    --gradient-primary: linear-gradient(135deg, hsl(205 63% 34%), hsl(205 63% 40%));
+    --gradient-accent: linear-gradient(135deg, hsl(20 100% 41%), hsl(20 100% 47%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 65% 20%), hsl(210 65% 15%));
+    --gradient-glow: linear-gradient(135deg, hsl(205 63% 34% / 0.12), hsl(20 100% 41% / 0.08));
 
     /* Dynamic Shadows */
-    --shadow-glow: 0 0 40px hsl(214 31% 26% / 0.2);
-    --shadow-accent: 0 4px 20px -4px hsl(17 49% 44% / 0.25);
+    --shadow-glow: 0 0 40px hsl(205 63% 34% / 0.2);
+    --shadow-accent: 0 4px 20px -4px hsl(20 100% 41% / 0.25);
     --shadow-minimal: 0 2px 10px -2px hsl(0 0% 0% / 0.08);
 
     /* Transitions */
@@ -65,13 +65,13 @@
 
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 0 0% 13%;
-    --sidebar-primary: 214 31% 26%;
+    --sidebar-foreground: 0 0% 17%;
+    --sidebar-primary: 205 63% 34%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 60 5% 90%;
-    --sidebar-accent-foreground: 0 0% 13%;
-    --sidebar-border: 60 3% 69%;
-    --sidebar-ring: 214 31% 26%;
+    --sidebar-accent: 0 0% 95%;
+    --sidebar-accent-foreground: 0 0% 17%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 205 63% 34%;
   }
 }
 
