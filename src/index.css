@@ -7,31 +7,32 @@
 
 @layer base {
   :root {
-    /* Hitchyard Clean Theme - Minimal Abercrombie-inspired Palette */
+    /* Hitchyard Dynamic Theme - Logistics Industry Palette */
     /* Base */
-    --background: 0 0% 100%; /* Pure White #FFFFFF */
-    --foreground: 0 0% 13%;   /* Near-black #222222 */
+    --background: 43 50% 96%; /* Warm Cream #F9F6F1 */
+    --foreground: 0 0% 20%;   /* Rich Charcoal #333333 */
 
     /* Surfaces */
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
+    --card: 0 0% 100%;        /* Pure White for cards */
+    --card-foreground: 0 0% 20%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
+    --popover-foreground: 0 0% 20%;
 
     /* Brand - Aegean Blue as primary */
     --primary: 214 31% 26%;   /* Aegean Blue #2E4057 */
     --primary-foreground: 0 0% 100%;
+    --primary-hover: 214 31% 32%; /* Lighter Aegean Blue #3A4A67 */
 
-    /* Secondary - Abercrombie Gray for subtle elements */
-    --secondary: 60 3% 69%;  /* Abercrombie Gray #B1B1AE */
-    --secondary-foreground: 0 0% 13%;
+    /* Secondary - Burnt Sienna for dynamic accents */
+    --secondary: 17 49% 44%;  /* Burnt Sienna #A65B38 */
+    --secondary-foreground: 0 0% 100%;
 
     /* Muted/secondary backgrounds and subtle UI */
-    --muted: 60 5% 90%;      /* Very light Abercrombie Gray #E5E5E3 */
-    --muted-foreground: 60 3% 69%; /* Abercrombie Gray #B1B1AE */
+    --muted: 60 3% 69%;      /* Abercrombie Gray #B1B1AE */
+    --muted-foreground: 0 0% 20%; /* Rich Charcoal */
 
     /* Accent links and interactive accents */
-    --accent: 214 31% 26%;    /* Aegean Blue #2E4057 */
+    --accent: 17 49% 44%;    /* Burnt Sienna #A65B38 */
     --accent-foreground: 0 0% 100%;
 
     /* System */
@@ -43,18 +44,20 @@
     --warning-foreground: 0 0% 10%;
 
     --border: 60 3% 69%;     /* Abercrombie Gray borders */
-    --input: 60 5% 90%;      /* Light gray input backgrounds */
+    --input: 0 0% 100%;      /* Pure White input backgrounds */
     --ring: 214 31% 26%;     /* Aegean Blue focus rings */
 
     --radius: 0.5rem;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(214 31% 26%), hsl(214 31% 22%));
-    --gradient-light: linear-gradient(135deg, hsl(0 0% 100%), hsl(60 5% 95%));
-    --gradient-glow: linear-gradient(135deg, hsl(214 31% 26% / 0.08), hsl(214 31% 26% / 0.04));
+    /* Enhanced Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(214 31% 26%), hsl(214 31% 32%));
+    --gradient-accent: linear-gradient(135deg, hsl(17 49% 44%), hsl(17 49% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(43 50% 96%), hsl(43 50% 92%));
+    --gradient-glow: linear-gradient(135deg, hsl(214 31% 26% / 0.12), hsl(17 49% 44% / 0.08));
 
-    /* Shadows */
-    --shadow-glow: 0 0 40px hsl(214 31% 26% / 0.15);
+    /* Dynamic Shadows */
+    --shadow-glow: 0 0 40px hsl(214 31% 26% / 0.2);
+    --shadow-accent: 0 4px 20px -4px hsl(17 49% 44% / 0.25);
     --shadow-minimal: 0 2px 10px -2px hsl(0 0% 0% / 0.08);
 
     /* Transitions */
@@ -107,8 +110,16 @@
     background: var(--gradient-primary);
   }
 
-  .gradient-dark {
-    background: var(--gradient-dark);
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .shadow-accent {
+    box-shadow: var(--shadow-accent);
   }
 
   .gradient-glow {

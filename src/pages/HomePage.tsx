@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
+import heroImage from "@/assets/hero-logistics-team.jpg";
 import { 
   Truck, 
   Shield, 
@@ -97,7 +98,7 @@ export default function HomePage() {
               <Button variant="ghost" onClick={() => navigate("/login")}>
                 Sign In
               </Button>
-              <Button variant="industrial" onClick={() => navigate("/apply")}>
+            <Button className="bg-accent hover:bg-accent/90" onClick={() => navigate("/apply")}>
                 Apply as Broker
               </Button>
             </div>
@@ -106,47 +107,54 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 gradient-glow"></div>
-        <div className="container mx-auto px-6 relative">
+      <section className="relative min-h-[70vh] overflow-hidden flex items-center">
+        {/* Hero Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        >
+          <div className="absolute inset-0 bg-primary/20"></div>
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6 text-primary font-semibold">
+            <Badge variant="secondary" className="mb-6 bg-card/90 text-primary font-semibold shadow-accent">
               The Load Board for Short Kings
             </Badge>
             
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              No <span className="text-primary">Junk Loads.</span><br />
-              No <span className="text-primary">Tire Kickers.</span><br />
-              Just <span className="text-primary">Real Freight.</span>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-card drop-shadow-lg">
+              No <span className="text-accent">Junk Loads.</span><br />
+              No <span className="text-accent">Tire Kickers.</span><br />
+              Just <span className="text-accent">Real Freight.</span>
             </h1>
             
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed text-card/90 drop-shadow-md">
               Invite-only freight platform for serious brokers and their truckers. 
               Hotshot, Power-only, Flatbed, Short hauls under 400 miles.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="xl" variant="industrial" className="group" onClick={() => navigate("/apply")}>
+              <Button size="xl" className="group bg-accent hover:bg-accent/90 shadow-accent" onClick={() => navigate("/apply")}>
                 Apply as Broker
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="xl" variant="outline" onClick={() => navigate("/get-invited")}>
+              <Button size="xl" variant="outline" className="bg-card/90 border-card hover:bg-card" onClick={() => navigate("/get-invited")}>
                 Get Invited by Dispatcher
               </Button>
             </div>
 
-            <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
+            <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm">
+              <div className="flex items-center gap-2 bg-card/90 px-3 py-2 rounded-full">
                 <CheckCircle className="h-4 w-4 text-success" />
-                <span>Loads expire in 1-3 hours</span>
+                <span className="text-foreground">Loads expire in 1-3 hours</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 bg-card/90 px-3 py-2 rounded-full">
                 <CheckCircle className="h-4 w-4 text-success" />
-                <span>Verified broker contacts</span>
+                <span className="text-foreground">Verified broker contacts</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 bg-card/90 px-3 py-2 rounded-full">
                 <CheckCircle className="h-4 w-4 text-success" />
-                <span>AI-powered load matching</span>
+                <span className="text-foreground">AI-powered load matching</span>
               </div>
             </div>
           </div>
@@ -165,13 +173,13 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <Card key={index} className="industrial-shadow hover:border-primary/50 transition-all group">
+              <Card key={index} className="shadow-accent hover:border-accent/50 transition-all group">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <feature.icon className="h-8 w-8 text-primary group-hover:scale-110 transition-transform" />
-                    <Badge variant="secondary">{feature.badge}</Badge>
+                    <Badge className="bg-accent/10 text-accent border-accent/20">{feature.badge}</Badge>
                   </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                  <CardTitle className="text-xl text-primary">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base leading-relaxed">
@@ -226,10 +234,10 @@ export default function HomePage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="xl" variant="industrial" onClick={() => navigate("/apply")}>
+            <Button size="xl" className="bg-accent hover:bg-accent/90 shadow-accent" onClick={() => navigate("/apply")}>
               Apply as Broker
             </Button>
-            <Button size="xl" variant="outline" onClick={() => navigate("/learn-more")}>
+            <Button size="xl" variant="outline" className="border-primary hover:bg-primary/5" onClick={() => navigate("/learn-more")}>
               Learn More
             </Button>
           </div>
