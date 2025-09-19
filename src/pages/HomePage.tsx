@@ -113,22 +113,22 @@ export default function HomePage() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
         >
-          <div className="absolute inset-0 bg-primary/20"></div>
+          <div className="absolute inset-0 bg-black/50"></div>
         </div>
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6 bg-card/90 text-primary font-semibold shadow-accent">
+            <Badge variant="secondary" className="mb-6 bg-white/95 text-primary font-semibold border-white/20 shadow-lg">
               The Load Board for Short Kings
             </Badge>
             
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-card drop-shadow-lg">
-              No <span className="text-accent">Junk Loads.</span><br />
-              No <span className="text-accent">Tire Kickers.</span><br />
-              Just <span className="text-accent">Real Freight.</span>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+              No <span className="text-white">Junk Loads.</span><br />
+              No <span className="text-white">Tire Kickers.</span><br />
+              Just <span className="text-white">Real Freight.</span>
             </h1>
             
-            <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed text-card/90 drop-shadow-md">
+            <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed text-white" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.7)' }}>
               Invite-only freight platform for serious brokers and their truckers. 
               Hotshot, Power-only, Flatbed, Short hauls under 400 miles.
             </p>
@@ -138,23 +138,23 @@ export default function HomePage() {
                 Apply as Broker
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="xl" variant="outline" className="bg-card/90 border-card hover:bg-card" onClick={() => navigate("/get-invited")}>
+              <Button size="xl" variant="outline" className="bg-white/95 border-white text-primary hover:bg-white" onClick={() => navigate("/get-invited")}>
                 Get Invited by Dispatcher
               </Button>
             </div>
 
             <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm">
-              <div className="flex items-center gap-2 bg-card/90 px-3 py-2 rounded-full">
+              <div className="flex items-center gap-2 bg-white/95 px-4 py-2 rounded-full shadow-lg">
                 <CheckCircle className="h-4 w-4 text-success" />
-                <span className="text-foreground">Loads expire in 1-3 hours</span>
+                <span className="text-primary font-medium">Loads expire in 1-3 hours</span>
               </div>
-              <div className="flex items-center gap-2 bg-card/90 px-3 py-2 rounded-full">
+              <div className="flex items-center gap-2 bg-white/95 px-4 py-2 rounded-full shadow-lg">
                 <CheckCircle className="h-4 w-4 text-success" />
-                <span className="text-foreground">Verified broker contacts</span>
+                <span className="text-primary font-medium">Verified broker contacts</span>
               </div>
-              <div className="flex items-center gap-2 bg-card/90 px-3 py-2 rounded-full">
+              <div className="flex items-center gap-2 bg-white/95 px-4 py-2 rounded-full shadow-lg">
                 <CheckCircle className="h-4 w-4 text-success" />
-                <span className="text-foreground">AI-powered load matching</span>
+                <span className="text-primary font-medium">AI-powered load matching</span>
               </div>
             </div>
           </div>

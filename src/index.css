@@ -9,8 +9,8 @@
   :root {
     /* Hitchyard Dynamic Theme - Logistics Industry Palette */
     /* Base */
-    --background: 43 50% 96%; /* Warm Cream #F9F6F1 */
-    --foreground: 0 0% 20%;   /* Rich Charcoal #333333 */
+    --background: 0 0% 100%; /* Pure White #FFFFFF */
+    --foreground: 0 0% 10%;   /* Deep Charcoal #1A1A1A */
 
     /* Surfaces */
     --card: 0 0% 100%;        /* Pure White for cards */
