@@ -6,7 +6,6 @@ import heroImage from "@/assets/hero-logistics-team.jpg";
 import { 
   Truck, 
   Shield, 
-  Zap, 
   MessageSquare, 
   Target, 
   TrendingUp,
@@ -15,7 +14,8 @@ import {
   Users,
   CheckCircle,
   ArrowRight,
-  Star
+  FileText,
+  Zap
 } from "lucide-react";
 
 export default function HomePage() {
@@ -24,60 +24,75 @@ export default function HomePage() {
   const features = [
     {
       icon: Shield,
-      title: "Grit Club Access",
-      description: "Invite-only platform for trusted brokers and their truckers. No spam, no junk loads.",
+      title: "FMCSA Broker Verification",
+      description: "Automated verification via FMCSA SAFER API - MC/DOT numbers, operating status, bond & insurance compliance checked in real-time",
+      badge: "Verified"
+    },
+    {
+      icon: CheckCircle,
+      title: "Industry Trust Standards",
+      description: "Trust systems modeled on FMC-Verified Brokerage Standards, CSA Safety Scores, and UCC Contract Registry principles",
+      badge: "Compliant"
+    },
+    {
+      icon: Target,
+      title: "AI Load Matching (pgvector)",
+      description: "Vector-based matching connects carriers with ideal loads based on lane history, preferences, and performance metrics",
+      badge: "AI-Powered"
+    },
+    {
+      icon: TrendingUp,
+      title: "Freight Futures",
+      description: "Lock in rates for future lanes, hedge against market volatility with pre-commitments and rate forecasting",
+      badge: "Innovative"
+    },
+    {
+      icon: DollarSign,
+      title: "Integrated Payments (Stripe Connect)",
+      description: "Escrow, Quick Pay options, transparent fees, automated payouts - all in one system",
+      badge: "Secure"
+    },
+    {
+      icon: FileText,
+      title: "Digital Contracts & E-Signatures",
+      description: "Rate confirmations, BOLs, DocuSeal integration - all documents digitally signed and stored securely",
+      badge: "Paperless"
+    },
+    {
+      icon: MessageSquare,
+      title: "Direct Broker-Carrier Messaging",
+      description: "Built-in communication with contract-linked threads, notifications, and load history tracking",
+      badge: "Fast"
+    },
+    {
+      icon: Users,
+      title: "Bidirectional Rating System",
+      description: "Communication, timeliness, and payment ratings build trust and reputation on both sides",
+      badge: "Transparent"
+    },
+    {
+      icon: Users,
+      title: "Invite-Only Network",
+      description: "Referral-based onboarding ensures quality participants and reduces fraud across the platform",
       badge: "Exclusive"
     },
     {
       icon: Clock,
-      title: "Fresh Loads Only",
-      description: "Loads auto-expire in 1-3 hours. No stale freight, no dead leads.",
-      badge: "Real-time"
-    },
-    {
-      icon: MessageSquare,
-      title: "Instant Broker Chat",
-      description: "Direct messaging with load-linked threads. Book loads with one click.",
-      badge: "Fast"
-    },
-    {
-      icon: Target,
-      title: "Smart AI Matching",
-      description: "Create your lane profile and get instant alerts for matching loads.",
-      badge: "AI-Powered"
-    },
-    {
-      icon: DollarSign,
-      title: "Rate Transparency",
-      description: "See average rates per lane. Expose lowballers, reward fair brokers.",
-      badge: "Honest"
+      title: "Speed-to-Book Metrics",
+      description: "Track and optimize load acceptance times, improving efficiency and identifying top performers",
+      badge: "Performance"
     },
     {
       icon: TrendingUp,
-      title: "Speed Rankings",
-      description: "Top carriers get early access to premium freight opportunities.",
-      badge: "Competitive"
-    }
-  ];
-
-  const testimonials = [
-    {
-      quote: "Finally, a load board that doesn't waste my time. Real loads from real brokers.",
-      author: "Mike Rodriguez",
-      role: "Owner-Operator",
-      rating: 5
+      title: "Real-Time Rate Intelligence",
+      description: "Market rates, lane analytics, demand forecasting powered by AI and historical data",
+      badge: "Smart"
     },
     {
-      quote: "Hitchyard gets me quality truckers fast. No more dealing with tire kickers.",
-      author: "Sarah Chen",
-      role: "Freight Broker",
-      rating: 5
-    },
-    {
-      quote: "The AI matching is spot-on. I get alerts for loads that actually fit my routes.",
-      author: "Tommy Jackson",
-      role: "Fleet Manager",
-      rating: 5
+      icon: Shield,
+      title: "Compliance & Safety Tracking",
+      description: "Monitor carrier CSA safety scores, insurance updates, and regulatory compliance status continuously",
+      badge: "Safe"
     }
   ];
 
@@ -90,7 +105,7 @@ export default function HomePage() {
             <div className="flex items-center gap-3">
               <div>
                 <h1 className="text-xl font-bold text-foreground">Hitchyard</h1>
-                <p className="text-sm text-muted-foreground">Load Board for Short Kings</p>
+                <p className="text-sm text-muted-foreground">Verified Freight Network</p>
               </div>
             </div>
             
@@ -118,10 +133,6 @@ export default function HomePage() {
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6 bg-white/95 text-primary font-semibold border-white/20 shadow-lg">
-              The Load Board for Short Kings
-            </Badge>
-            
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
               No <span className="text-white">Junk Loads.</span><br />
               No <span className="text-white">Tire Kickers.</span><br />
@@ -129,8 +140,7 @@ export default function HomePage() {
             </h1>
             
             <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed text-white" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.7)' }}>
-              Invite-only freight platform for serious brokers and their truckers. 
-              Hotshot, Power-only, Flatbed, Short hauls under 400 miles.
+              FMCSA-verified brokers and trusted carriers on an invite-only freight network.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -161,13 +171,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Grid */}
+      {/* Complete Features List */}
       <section className="py-20 bg-card/30">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Built for the Freight Game</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Every feature designed to eliminate waste and maximize efficiency in freight brokerage.
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Complete Freight Operating System</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              End-to-end platform features for verified brokers and trusted carriers - from verification to payment
             </p>
           </div>
 
@@ -192,45 +202,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Trusted by Freight Pros</h2>
-            <p className="text-xl text-muted-foreground">
-              Real feedback from brokers and truckers using Hitchyard
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="industrial-shadow">
-                <CardContent className="pt-6">
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <blockquote className="text-lg mb-4 leading-relaxed">
-                    "{testimonial.quote}"
-                  </blockquote>
-                  <div>
-                    <div className="font-semibold">{testimonial.author}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20 bg-primary/5 border-t border-border">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Join the Grit Club?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Join the Verified Network?</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Get verified as a broker and start posting quality loads to our exclusive network of truckers.
+            Get FMCSA-verified as a broker and start posting quality loads to our exclusive network of trusted carriers.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -251,12 +228,12 @@ export default function HomePage() {
             <div className="flex items-center gap-3 mb-4 md:mb-0">
               <div>
                 <div className="font-bold">Hitchyard</div>
-                <div className="text-sm text-muted-foreground">Load Board for Short Kings</div>
+                <div className="text-sm text-muted-foreground">Verified Freight Network</div>
               </div>
             </div>
             
             <div className="text-sm text-muted-foreground">
-              © 2024 Hitchyard. Gritty freight, delivered.
+              © 2024 Hitchyard. Verified freight, delivered.
             </div>
           </div>
         </div>
